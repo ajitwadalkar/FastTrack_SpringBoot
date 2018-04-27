@@ -13,11 +13,10 @@ import java.util.Map;
 public class inventoryController {
 
 
-
     @Autowired
     inventoryRepo inventoryrepo;
 
-//Fet all SKU
+    //Fet all SKU
     @GetMapping("skus")
     public List<Inventory> getAllNotes() {
         return inventoryrepo.findAll();
@@ -25,8 +24,8 @@ public class inventoryController {
 
     // Check if SKU is present
     @GetMapping("sku/{id}")
-    public Inventory getInvById(@PathVariable(value = "id") Long noteId) {
-        return inventoryrepo.findById(noteId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
+    public Inventory getInvById(@PathVariable(value = "id") Long sku) {
+        return inventoryrepo.findById(sku)
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory", "id", sku));
     }
 }
