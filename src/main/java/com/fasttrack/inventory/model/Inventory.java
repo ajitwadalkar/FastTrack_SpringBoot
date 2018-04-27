@@ -17,7 +17,10 @@ import java.util.Date;
 public class Inventory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inv_id")
     private long invId;
+
+    @Column(name = "inv_UPA")
     private String invUpa;
     private String invThumbnail;
     private long invRtnQty;

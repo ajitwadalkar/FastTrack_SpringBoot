@@ -10,6 +10,7 @@ import java.util.Map;
 public class mainController {
     @RequestMapping("/home")
     public String home(Map<String, Object> model) {
+
         return "index";
     }
 

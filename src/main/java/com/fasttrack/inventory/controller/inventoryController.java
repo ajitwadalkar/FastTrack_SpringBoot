@@ -6,26 +6,33 @@ import com.fasttrack.inventory.repository.inventoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/")
 public class inventoryController {
 
-
     @Autowired
     inventoryRepo inventoryrepo;
 
-    //Fet all SKU
-    @GetMapping("skus")
-    public List<Inventory> getAllNotes() {
-        return inventoryrepo.findAll();
+    @GetMapping("getcount")
+    public long findCount(){
+        return inventoryrepo.findAll().size();
     }
 
-    // Check if SKU is present
-    @GetMapping("sku/{id}")
-    public Inventory getInvById(@PathVariable(value = "id") Long sku) {
-        return inventoryrepo.findById(sku)
-                .orElseThrow(() -> new ResourceNotFoundException("Inventory", "id", sku));
+    @GetMapping("findbyupa/{upa}")
+    public String getByUpa(@PathVariable(value = "upa") String upa) {
+        return inventoryrepo.searchByUpa(upa);
+    }
+
+    @GetMapping("getlastmodifieddate")
+    public String getLastUpdateDate()
+    {
+        return inventoryrepo.getLastDate();
+    }
+
+    @GetMapping("uploadcsv")
+    public void uploadCSVData()
+    {
+        inventoryrepo.uploadData();
     }
 }
